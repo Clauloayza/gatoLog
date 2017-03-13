@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Gato Loco</title>
-	<meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <title>Gato Loco</title>
 </head>
-<body>
+<body class="text-center">
 	<header>
 		<nav class="navbar navbar-default">
 		  <div class="container-fluid">
@@ -29,41 +29,80 @@
 		  </div>
 		</nav>	
 	</header>
-	<section id="home" class="visible">
+	<section id="saludo" class="visible">
 		<div class="content">
 			<div class="container">
-				<h1>BIENVENIDO A GATO LOCO</h1>
-				<button class="btn btn-default">Iniciar juego</button>
+			<div class="text-center home">
+			    <h1>BIENVENIDO A GATO LOCO!</h1>
+				<button class="btn btn-default " id="btn-saludo">INICIE JUEGO</button>
+			</div>
+			
 			</div>
 		</div>
 	</section>
 	
-	<section id="name">
+	<section id="nombres">
 		<div class="content">
 			<div class="container">
 				<form class="navbar-form">
 					<div class="form-group">
-					  <input type="text" class="form-control" placeholder="Nombre de jugador N°1">
+					  <input type="text" class="form-control text-center" placeholder="Nombre de jugador N°1" id="player1">
 					</div>
-					<button type="submit" class="btn btn-default">Jugador N°1</button>
+					<p class="name">Ingrese el nombre del jugador 1 </p>
 			    </form>
 			    <form class="navbar-form">
 					<div class="form-group">
-					  <input type="text" class="form-control" placeholder="Nombre de jugador N°2">
+					  <input type="text" class="form-control text-center" placeholder="Nombre de jugador N°2" id="player2">
 					</div>
-					<button type="submit" class="btn btn-default">Jugador N°2</button>
+					<p class="name">Ingrese el nombre del jugador 2</p>
 				</form>
+				<button id="btn-nombres" class="btn btn-default ">COMENZAR</button>
+			    
 			</div>
 		</div>
 	</section>
 	
-	<section>
-		
+	<section id="juego">
+		<div class="content">
+		    <div class="container">
+		        <h2>JUEGO DEL GATO</h2>
+		        <div>
+		            <div class="messages"></div>
+		            <div class="turn"></div>
+		            <table>
+		                <tr>
+		                    <td class="item1 td"></td>
+		                    <td class="item2 td"></td>
+		                    <td class="item3 td"></td>
+		                </tr>
+		                <tr>
+		                    <td class="item4 td"></td>
+		                    <td class="item5 td"></td>
+		                    <td class="item6 td"></td>
+		                </tr>
+		                <tr>
+		                    <td class="item7 td"></td>
+		                    <td class="item8 td"></td>
+		                    <td class="item9 td"></td>
+		                </tr>
+		            </table>
+		            <br>
+		            <input type="button" class="reset" value="Reset" >
+		        </div>
+		    </div>
+		</div>
 	</section>
 	<section>
-
+        <div class="content">
+		    <div class="container">
+		        <h2>Historial</h2>
+		    </div>
+		</div>
 	</section>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
 </html>

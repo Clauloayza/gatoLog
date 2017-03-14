@@ -7,7 +7,7 @@ function init()
 	currentSection = $('#saludo');
 	$('#btn-saludo').click(onClickBtnSaludo);
 	$('#btn-nombres').click(onClickBtnNombre);
-    
+    $('#btn-historial').click(onClickBtnHistorial);
 
 	TweenMax.from($('#saludo h1'), 1, {marginBottom:'0px', ease:Elastic.easeOut});
 }
@@ -15,6 +15,7 @@ function init()
 function onClickBtnSaludo() {
 	gotoSection('nombres');
 }
+
 
 function onClickBtnNombre() {
 	    
@@ -31,7 +32,7 @@ function onClickBtnNombre() {
     }
 }
 
-function validateMayus(_evt){
+/*function validateMayus(_evt){
     var player1 = $('#player1');
     var player2 = $('#player2');
     
@@ -41,9 +42,38 @@ function validateMayus(_evt){
     }else{
        // alert("No registrado");
     }
+}*/
+
+function onClickBtnHistorial(evt){
+	//evt.preventDefault();
+    gotoSection('historial');
+	getHistorial();
 }
 
-function convertirMayus(texto){
+function getHistorial(){
+	$.ajax({
+		url:"http://test-ta.herokuapp.com/games"
+		
+	}).done(function(_data){
+		console.log(_data);
+		dibujarHistorial(_data);
+		
+	});
+}
+
+function dibujarHistorial(_datos){
+	var lista = $('#lista-juegos');
+	
+	for (var i in _datos){
+		console.log(_datos[i].winner_player);
+		var html = '<li class="list-group-item">WINNER:'+_datos[i].winner_player+'</li>';
+		lista.append(html);
+	}
+}
+
+
+//MAYUSCULA
+/*function convertirMayus(texto){
     
     var nombreArray = texto.split("");
     var primeraLetra = nombreArray[0];
@@ -63,7 +93,7 @@ function convertirMayus(texto){
     }
     
     return mayuscula;
-}
+}*/
 
 
 function gotoSection(_identificadorDeSeccion)
@@ -78,11 +108,6 @@ function gotoSection(_identificadorDeSeccion)
 }
 
 
-//MAYUSCULAS
-function onButtonMayus()
-{
-    
-}
 
 //TIC TAC TOE *******
 //**********
@@ -188,3 +213,4 @@ $('.js-wins, .reset').on('click', function(){
   $('.red-line').removeClass('active');
   oneClick = 0;
 });
+

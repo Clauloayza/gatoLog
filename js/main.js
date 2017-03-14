@@ -7,6 +7,7 @@ function init()
 	currentSection = $('#saludo');
 	$('#btn-saludo').click(onClickBtnSaludo);
 	$('#btn-nombres').click(onClickBtnNombre);
+    
 
 	TweenMax.from($('#saludo h1'), 1, {marginBottom:'0px', ease:Elastic.easeOut});
 }
@@ -16,8 +17,54 @@ function onClickBtnSaludo() {
 }
 
 function onClickBtnNombre() {
-	gotoSection('juego');
+	    
+    var player1 = $('#player1');
+    //localStorage.setItem('x', player1.val());
+    var player2 = $('#player2');
+    //localStorage.setItem('o', player2.val());
+    
+    if(player1.val() =='' || player2.val()==''){
+       $('.texto').html("<br><h4 class='text-center' style='background:rgb(0, 197, 255)'>DEBE INGRESAR SU NOMBRE!</h4>");
+    }else{
+        $('.texto').html("");
+        gotoSection('juego');
+    }
 }
+
+function validateMayus(_evt){
+    var player1 = $('#player1');
+    var player2 = $('#player2');
+    
+    if(player1.val() != "" && player2.val() != "" ){
+        player1.val(convertirMayus(player1.val()));
+        player2.val(convertirMayus(player2.val()));
+    }else{
+       // alert("No registrado");
+    }
+}
+
+function convertirMayus(texto){
+    
+    var nombreArray = texto.split("");
+    var primeraLetra = nombreArray[0];
+    var mayuscula = primeraLetra.toUpperCase();
+    var espacio = false;
+
+    for(var i=1; i<nombreArray.length; i++) {
+
+        if(espacio){
+            mayuscula += nombreArray[i].toUpperCase();
+            espacio = false;
+        } else {
+            mayuscula += nombreArray[i];
+            if(nombreArray[i] == " ")
+                espacio = true;
+        }
+    }
+    
+    return mayuscula;
+}
+
 
 function gotoSection(_identificadorDeSeccion)
 {
@@ -30,169 +77,21 @@ function gotoSection(_identificadorDeSeccion)
 	currentSection = nextSection;
 }
 
-// tic tac toe
-//*************************
 
-/*$(function () {
-
-    var   = [], 
-        SIZE = 3,
-        EMPTY = "&nbsp;",
-        score,
-        moves,
-        turn = "X",
-        win = function (score) {
-        for (var i = 0; i < wins.length; i += 1) {
-            if ((wins[i] & score) === wins[i]) {
-                return true;
-            }
-        }
-        return false;
-    },
-    set = function () {
-        
-        if ($(this).html() !== EMPTY) {
-            return;
-        }
-        $(this).html(turn);
-        console.log($(this));
-        moves += 1;
-        score[turn] += $(this)[0].indicator;
-        console.log(score[turn]);
-        if (win(score[turn])) {
-            alert(turn + " wins!");
-            startNewGame();
-        } else if (moves === SIZE * SIZE) {
-            alert("Cat\u2019s game!");
-            startNewGame();
-        } else {
-            turn = turn === "X" ? "O" : "X";
-        }
-    },
-
-    play = function () {
-        var board = $("<table border=1 cellspacing=0>"), indicator = 1;
-        for (var i = 0; i < SIZE; i += 1) {
-            var row = $("<tr>");
-            board.append(row);
-            for (var j = 0; j < SIZE; j += 1) {
-                var cell = $("<td height=50 width=50 align=center valign=center></td>");
-                cell[0].indicator = indicator;
-                cell.click(set);
-                row.append(cell);
-                squares.push(cell);
-                indicator += indicator;
-            }
-        }
-
-        $(document.getElementById("tictactoe") || document.body).append(board);
-        startNewGame();
-    };
-
-    play();
-});
-
-
-$(function() {
-  
-  var player = 1;
-  var table = $('table');
-  var messages = $('.messages');
-  var turn = $('.turn');
-  displayNextPlayer(turn, player);
-  
-  $('td').click(function() {
-    td = $(this);
-    var state = getState(td);
-    if(!state) {
-      var pattern = definePatternForCurrentPlayer(player);
-      changeState(td, pattern);
-      if(checkIfPlayerWon(table, pattern)) {
-        messages.html('Player '+player+' has won.');
-        turn.html('');
-      } else {
-        player = setNextPlayer(player);
-        displayNextPlayer(turn, player);
-      }
-    } else {
-      messages.html('This box is already checked.');
-    }
-  });
-  
-  $('.reset').click(function() {
-    player = 1;
-    messages.html('');
-    reset(table);
-    displayNextPlayer(turn, player);
-  });
-  
-});
-
-function getState(td) {
-  if(td.hasClass('cross') || td.hasClass('circle')) {
-    return 1;
-  } else {
-    return 0;
-  }
+//MAYUSCULAS
+function onButtonMayus()
+{
+    
 }
 
-function changeState(td, pattern) {
-  return td.addClass(pattern);
-}
-
-function definePatternForCurrentPlayer(player) {
-  if(player == 1) {
-    return 'cross';
-  } else {
-    return 'circle';
-  }
-}
-
-function setNextPlayer(player) {
-  if(player == 1) {
-    return player = 2;
-  } else {
-    return player = 1;
-  }
-}
-
-function displayNextPlayer(turn, player) {
-  turn.html('Player turn : '+player);
-}
-
-function checkIfPlayerWon(table, pattern) {
-  var won = 0;
-  if(table.find('.item1').hasClass(pattern) && table.find('.item2').hasClass(pattern) && table.find('.item3').hasClass(pattern)) {
-    won = 1;
-  } else if (table.find('.item1').hasClass(pattern) && table.find('.item4').hasClass(pattern) && table.find('.item7').hasClass(pattern)) {
-    won = 1;
-  } else if (table.find('.item1').hasClass(pattern) && table.find('.item5').hasClass(pattern) && table.find('.item9').hasClass(pattern)) {
-    won = 1;
-  } else if (table.find('.item4').hasClass(pattern) && table.find('.item5').hasClass(pattern) && table.find('.item6').hasClass(pattern)) {
-    won = 1;
-  } else if (table.find('.item7').hasClass(pattern) && table.find('.item8').hasClass(pattern) && table.find('.item9').hasClass(pattern)) {
-    won = 1;
-  } else if (table.find('.item2').hasClass(pattern) && table.find('.item5').hasClass(pattern) && table.find('.item8').hasClass(pattern)) {
-    won = 1;
-  } else if (table.find('.item3').hasClass(pattern) && table.find('.item6').hasClass(pattern) && table.find('.item9').hasClass(pattern)) {
-    won = 1;
-  } else if (table.find('.item3').hasClass(pattern) && table.find('.item5').hasClass(pattern) && table.find('.item7').hasClass(pattern)) {
-    won = 1;
-  }
-  return won;
-}
-
-function reset(table) {
-  table.find('td').each(function() {
-    $(this).removeClass('circle').removeClass('cross');
-  });
-}
-*/
+//TIC TAC TOE *******
+//**********
 var oneClick = 0;
 
+//creando clase .active en padre box
 $('.box').click(function() {
-  var tally = oneClick ++;
-  if ( tally % 2 === 0 ) {
+  var cuadrado = oneClick ++;
+  if ( cuadrado % 2 === 0 ) {
     if ( $(this).children('.o').hasClass('active')){
       oneClick --;
     } else{
@@ -205,7 +104,10 @@ $('.box').click(function() {
       $(this).children('.o').addClass('active');
     }
   }
-  
+ 
+    
+    
+//X:nth-child() --> especificar en el elemento posicion del hijo del padre para //x y o **************
   var xChild1 = $('.box:nth-child(1)').children('.x').hasClass('active'),
       oChild1 = $('.box:nth-child(1)').children('.o').hasClass('active'),
       xChild2 = $('.box:nth-child(2)').children('.x').hasClass('active'),
@@ -277,6 +179,8 @@ $('.box').click(function() {
   }
 });
 
+
+//function reset
 $('.js-wins, .reset').on('click', function(){
   $('.js-wins').removeClass('active');
   $('.x').removeClass('active');

@@ -64,7 +64,7 @@ function onClickBtnHistorial(evt){
 
 function getHistorial(){
 	$.ajax({
-		url:"http://test-ta.herokuapp.com/games"
+		url:"https://test-ta.herokuapp.com/games"
 		
 	}).done(function(_data){
 		console.log(_data);
@@ -73,13 +73,13 @@ function getHistorial(){
 	});
 }
 
-/*function onClickBtnComentar(){
+function onClickBtnComentar(){
 	//alert("hola");
 	enviarComentario(currentGameID, $('#name').val(), $('#content').val());
 	
 }
 
-function onClickBtnJugar(){
+/*function onClickBtnJugar(){
 	enviarJuego();
 }
 
@@ -93,7 +93,7 @@ function enviarJuego(){
 
 function enviarComentario(_idGame, _name, _content){
 	$.ajax({
-		url: 'http://test-ta.herokuapp.com/games/'+_idGame+'/comments',
+		url: 'https://test-ta.herokuapp.com/games/'+_idGame+'/comments',
 		type: 'POST',
 		data:{comment:{name:_name, content:_content, game_id:_idGame}}
 	}).done(function(_data){
@@ -105,7 +105,7 @@ function enviarComentario(_idGame, _name, _content){
 
 function getSingleGame(_idGame){
 	$.ajax({
-		url:"http://test-ta.herokuapp.com/games/"+_idGame
+		url:"https://test-ta.herokuapp.com/games/"+_idGame
 	}).done(function(_data){
 		console.log(_data);
 	})
@@ -113,7 +113,7 @@ function getSingleGame(_idGame){
 
 function getComentarios(_idGame){
 	$.ajax({
-		url:"http://test-ta.herokuapp.com/games/"+_idGame+"/comments"
+		url:"https://test-ta.herokuapp.com/games/"+_idGame+"/comments"
 	}).done(function(_data){
 		console.log(_data);
 		dibujarComentarios(_data);

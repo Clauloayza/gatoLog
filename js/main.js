@@ -73,7 +73,9 @@ function getHistorial(){
 }
 
 function onClickBtnComentar(){
+	//alert("hola");
 	enviarComentario(currentGameID, $('#name').val(), $('#content').val());
+	
 }
 
 function enviarComentario(_idGame, _name, _content){
@@ -85,6 +87,7 @@ function enviarComentario(_idGame, _name, _content){
 		console.log(_data);
 		getComentarios(_idGame);
 	});
+	
 }
 
 function getSingleGame(_idGame){

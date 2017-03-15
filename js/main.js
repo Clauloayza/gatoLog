@@ -73,14 +73,14 @@ function getHistorial(){
 	});
 }
 
-function onClickBtnComentar(){
+/*function onClickBtnComentar(){
 	//alert("hola");
 	enviarComentario(currentGameID, $('#name').val(), $('#content').val());
 	
 }
 
-/*function onClickBtnJugar(){
-	
+function onClickBtnJugar(){
+	enviarJuego();
 }
 
 function enviarJuego(){

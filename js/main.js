@@ -10,6 +10,7 @@ function init()
 	$('#btn-nombres').click(onClickBtnNombre);
     $('#btn-historial').click(onClickBtnHistorial);
 	$('#btn-comentar').click(onClickBtnComentar);
+	//$('#btn-jugar').click(onClickBtnJugar);
 	$('#lista-juegos').on('click', 'button', onClickItemJuego);
 
 	TweenMax.from($('#saludo h1'), 1, {marginBottom:'0px', ease:Elastic.easeOut});
@@ -77,6 +78,18 @@ function onClickBtnComentar(){
 	enviarComentario(currentGameID, $('#name').val(), $('#content').val());
 	
 }
+
+/*function onClickBtnJugar(){
+	
+}
+
+function enviarJuego(){
+	$.ajax({
+		url:'http://test-ta.herokuapp.com/games'
+	}).done(function(){
+		
+	})
+}*/
 
 function enviarComentario(_idGame, _name, _content){
 	$.ajax({
